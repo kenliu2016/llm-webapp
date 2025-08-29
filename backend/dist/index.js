@@ -7,6 +7,8 @@ import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
 import { Server } from 'socket.io';
 import passport from 'passport';
+import { DatabaseService } from './services/databaseService.js';
+import { RedisService } from './services/redisService.js';
 // Import routes - using fallbacks for missing routes
 import chatRoutes from './routes/chat.js';
 // Import middleware
@@ -19,6 +21,9 @@ import './config/passport.js';
 dotenv.config();
 const app = express();
 const server = createServer(app);
+// Initialize database and Redis services
+const dbService = new DatabaseService();
+const redisService = new RedisService();
 // CORS configuration
 const corsOptions = {
     origin: [
@@ -101,13 +106,47 @@ app.use((req, res, next) => {
     next();
 });
 // Health check endpoint
-app.get('/health', (_req, res) => {
-    res.json({
-        status: 'healthy',
-        timestamp: new Date().toISOString(),
-        uptime: process.uptime(),
-        version: process.env.npm_package_version || '2.0.0'
-    });
+app.get('/health', async (_req, res) => {
+    try {
+        // Check database health
+        const dbHealth = await dbService.healthCheck();
+        // Check Redis health
+        const redisHealth = await redisService.healthCheck();
+        res.json({
+            status: 'healthy',
+            timestamp: new Date().toISOString(),
+            uptime: process.uptime(),
+            version: process.env.npm_package_version || '2.0.0',
+            services: {
+                database: {
+                    status: dbHealth ? 'connected' : 'disconnected',
+                    type: 'PostgreSQL',
+                    host: process.env.DB_HOST || 'localhost'
+                },
+                redis: {
+                    status: redisHealth ? 'connected' : 'disconnected',
+                    host: process.env.REDIS_HOST || 'localhost'
+                },
+                api: 'available',
+                socket: 'available'
+            },
+            environment: process.env.NODE_ENV || 'development',
+            memoryUsage: process.memoryUsage()
+        });
+    }
+    catch (error) {
+        logger.error('Health check failed:', error);
+        res.status(503).json({
+            status: 'unhealthy',
+            timestamp: new Date().toISOString(),
+            error: error instanceof Error ? error.message : 'Unknown error',
+            services: {
+                database: 'error',
+                redis: 'error',
+                api: 'partially available'
+            }
+        });
+    }
 });
 // API Routes - Basic setup (enhanced routes to be added)
 app.use('/api/chat', chatRoutes);
@@ -217,9 +256,19 @@ app.use('/api/*', (req, res) => {
 // Enhanced error handling middleware
 app.use(errorTracking);
 // Graceful shutdown handling
-const gracefulShutdown = async () => {
-    logger.info('Graceful shutdown initiated...');
+const gracefulShutdown = async (signal) => {
+    logger.info(`Received ${signal || 'shutdown signal'}, shutting down gracefully...`);
     try {
+        // Disconnect from Redis
+        if (redisService) {
+            await redisService.disconnect();
+            logger.info('Redis connection closed');
+        }
+        // Disconnect from database
+        if (dbService && typeof dbService.isReady === 'function' && dbService.isReady()) {
+            await dbService.disconnect();
+            logger.info('Database connection closed');
+        }
         // Close HTTP server
         await new Promise((resolve, reject) => {
             server.close((err) => {
@@ -249,16 +298,35 @@ process.on('unhandledRejection', (reason, promise) => {
     logger.error('Unhandled Rejection at:', promise, 'reason:', reason);
     process.exit(1);
 });
-// Start server on port 3001
-const PORT = process.env.PORT || 3001;
-server.listen(PORT, () => {
-    logger.info(`🚀 LLM Chat API Server (Phase 6) running on port ${PORT}`, {
-        port: PORT,
-        environment: process.env.NODE_ENV || 'development',
-        features: 'Authentication, OAuth, Admin Dashboard, Multi-modal Chat, Monitoring',
-        cors: corsOptions.origin,
-        timestamp: new Date().toISOString()
-    });
-});
+// Initialize and start the server with database and Redis connections
+async function startServer() {
+    try {
+        // Connect to database
+        logger.info('Connecting to database...');
+        await dbService.connect();
+        logger.info('Database connected successfully');
+        // Connect to Redis
+        logger.info('Connecting to Redis...');
+        await redisService.connect();
+        logger.info('Redis connected successfully');
+        // Start server on port 3001
+        const PORT = process.env.PORT || 3001;
+        server.listen(PORT, () => {
+            logger.info(`🚀 LLM Chat API Server (Phase 6) running on port ${PORT}`, {
+                port: PORT,
+                environment: process.env.NODE_ENV || 'development',
+                features: 'Authentication, OAuth, Admin Dashboard, Multi-modal Chat, Monitoring',
+                cors: corsOptions.origin,
+                timestamp: new Date().toISOString()
+            });
+        });
+    }
+    catch (error) {
+        logger.error('Failed to start server:', error);
+        process.exit(1);
+    }
+}
+// Start the server
+startServer();
 export { app, server, io };
 //# sourceMappingURL=index.js.map

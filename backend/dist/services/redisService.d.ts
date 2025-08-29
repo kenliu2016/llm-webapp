@@ -10,11 +10,18 @@ export interface SessionData {
 export declare class RedisService {
     private client;
     private isConnected;
+    private maxRetries;
+    private retryDelay;
+    private connectionOptions;
     constructor();
     /**
-     * Connect to Redis
+     * Connect to Redis with retry mechanism
      */
     connect(): Promise<void>;
+    /**
+     * Log Redis server information
+     */
+    private logRedisInfo;
     /**
      * Disconnect from Redis
      */

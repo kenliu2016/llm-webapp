@@ -3,6 +3,7 @@ import { Download, Share2, Settings } from 'lucide-react';
 import MessageList from './MessageList';
 import InputArea from './InputArea';
 import TypingIndicator from './TypingIndicator';
+import { chatAPI } from '../services/apiService';
 
 interface Message {
   id: string;
@@ -10,6 +11,7 @@ interface Message {
   role: 'user' | 'assistant';
   timestamp: Date;
   model?: string;
+  tokenCount?: number;
 }
 
 interface ChatInterfaceProps {
@@ -21,21 +23,66 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedModel }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
   const [streamingMessage, setStreamingMessage] = useState('');
+  const [currentConversationId, setCurrentConversationId] = useState<string>('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Mock initial conversation
+  // Initialize with a default conversation
   useEffect(() => {
-    const initialMessages: Message[] = [
-      {
-        id: '1',
-        content: 'Hello! I\'m your AI assistant powered by ChipFoundry Services. How can I help you today?',
-        role: 'assistant',
-        timestamp: new Date(),
-        model: selectedModel,
-      },
-    ];
-    setMessages(initialMessages);
-  }, [selectedModel]);
+    const initializeChat = async () => {
+      try {
+        // Try to get existing conversations
+        const conversationsResponse = await chatAPI.getConversations();
+        let conversationId = currentConversationId;
+        
+        // If no current conversation or it doesn't exist, create a new one
+        if (!conversationId || !conversationsResponse.conversations?.find((c: { id: string }) => c.id === conversationId)) {
+          const newConversation = await chatAPI.createConversation({
+            title: 'New Conversation',
+            model: selectedModel,
+            temperature: 0.7,
+            maxTokens: 2048
+          });
+          conversationId = newConversation.conversation.id;
+          setCurrentConversationId(conversationId);
+        }
+
+        // Get conversation history
+        const conversationResponse = await chatAPI.getConversation(conversationId);
+        if (conversationResponse.messages && conversationResponse.messages.length > 0) {
+          const formattedMessages: Message[] = conversationResponse.messages.map((msg: any) => ({
+            id: msg.id,
+            content: msg.content,
+            role: msg.role as 'user' | 'assistant',
+            timestamp: new Date(msg.created_at),
+            model: msg.model || selectedModel,
+            tokenCount: msg.token_count
+          }));
+          setMessages(formattedMessages);
+        } else {
+          // If no messages, add a welcome message
+          setMessages([{
+            id: Date.now().toString(),
+            content: 'Hello! I\'m your AI assistant powered by ChipFoundry Services. How can I help you today?',
+            role: 'assistant',
+            timestamp: new Date(),
+            model: selectedModel,
+          }]);
+        }
+      } catch (error) {
+        console.error('Error initializing chat:', error);
+        // Fallback to mock message if API call fails
+        setMessages([{
+          id: '1',
+          content: 'Hello! I\'m your AI assistant. How can I help you today?',
+          role: 'assistant',
+          timestamp: new Date(),
+          model: selectedModel,
+        }]);
+      }
+    };
+
+    initializeChat();
+  }, [selectedModel, currentConversationId]);
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
@@ -46,7 +93,23 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedModel }) => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleSendMessage = async (content: string, _attachments?: File[]) => {
+  const handleSendMessage = async (content: string, attachments?: File[]) => {
+    // If no conversation ID, create one
+    if (!currentConversationId) {
+      try {
+        const newConversation = await chatAPI.createConversation({
+          title: 'New Conversation',
+          model: selectedModel,
+          temperature: 0.7,
+          maxTokens: 2048
+        });
+        setCurrentConversationId(newConversation.conversation.id);
+      } catch (error) {
+        console.error('Error creating conversation:', error);
+        return;
+      }
+    }
+
     const userMessage: Message = {
       id: Date.now().toString(),
       content,
@@ -59,77 +122,59 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedModel }) => {
     setStreamingMessage('');
 
     try {
-      // Simulate API call with streaming response
-      const response = await simulateStreamingResponse(content, selectedModel);
-      
-      let accumulatedContent = '';
-      for (const chunk of response) {
-        accumulatedContent += chunk;
-        setStreamingMessage(accumulatedContent);
-        await new Promise(resolve => setTimeout(resolve, 50)); // Simulate streaming delay
+      // Process attachments if any
+      const attachmentIds: string[] = [];
+      if (attachments && attachments.length > 0) {
+        for (const file of attachments) {
+          try {
+            const uploadResponse = await chatAPI.uploadImage(currentConversationId, file);
+            if (uploadResponse.files && uploadResponse.files.length > 0) {
+              attachmentIds.push(...uploadResponse.files.map((f: any) => f.id));
+            }
+          } catch (uploadError) {
+            console.error('Error uploading file:', uploadError);
+          }
+        }
       }
 
-      // Add final message
+      // Send message to backend
+      const messageResponse = await chatAPI.sendMessage(currentConversationId, {
+        content,
+        model: selectedModel,
+        temperature: 0.7,
+        maxTokens: 2048,
+        attachments: attachmentIds
+      });
+
+      // Add assistant message
       const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        content: accumulatedContent,
+        id: messageResponse.message.id,
+        content: messageResponse.message.content,
         role: 'assistant',
         timestamp: new Date(),
         model: selectedModel,
+        tokenCount: messageResponse.message.token_count
       };
 
       setMessages(prev => [...prev, assistantMessage]);
       setStreamingMessage('');
     } catch (error) {
       console.error('Error sending message:', error);
-      // Handle error - could add error message to chat
+      // Add error message to chat
+      const errorMessage: Message = {
+        id: (Date.now() + 2).toString(),
+        content: 'Sorry, I couldn\'t process your request. Please try again later.',
+        role: 'assistant',
+        timestamp: new Date(),
+        model: selectedModel,
+      };
+      setMessages(prev => [...prev, errorMessage]);
     } finally {
       setIsTyping(false);
     }
   };
 
-  // Simulate streaming response from AI
-  const simulateStreamingResponse = async (userInput: string, model: string): Promise<string[]> => {
-    // Mock responses based on input
-    const responses = {
-      hello: "Hello! I'm happy to help you today. What would you like to know or discuss?",
-      code: "Here's a code example for you:\n\n```javascript\nfunction greet(name) {\n  return `Hello, ${name}!`;\n}\n\nconsole.log(greet('World'));\n```\n\nThis is a simple JavaScript function that takes a name parameter and returns a greeting.",
-      explain: "I'd be happy to explain that concept! Let me break it down into simpler terms with some examples to make it clearer.",
-      default: "That's an interesting question! Let me think about this and provide you with a comprehensive answer that covers the key points you're asking about."
-    };
-
-    let responseText = responses.default;
-    const lowerInput = userInput.toLowerCase();
-    
-    if (lowerInput.includes('hello') || lowerInput.includes('hi')) {
-      responseText = responses.hello;
-    } else if (lowerInput.includes('code') || lowerInput.includes('function')) {
-      responseText = responses.code;
-    } else if (lowerInput.includes('explain') || lowerInput.includes('what')) {
-      responseText = responses.explain;
-    }
-
-    // Add model-specific prefix
-    const modelPrefix = `*Using ${model}:* `;
-    responseText = modelPrefix + responseText;
-
-    // Split into chunks for streaming effect
-    const words = responseText.split(' ');
-    const chunks: string[] = [];
-    let currentChunk = '';
-
-    for (const word of words) {
-      if (currentChunk.length + word.length + 1 < 20) {
-        currentChunk += (currentChunk ? ' ' : '') + word;
-      } else {
-        if (currentChunk) chunks.push(currentChunk + ' ');
-        currentChunk = word;
-      }
-    }
-    if (currentChunk) chunks.push(currentChunk);
-
-    return chunks;
-  };
+  // Remove the simulateStreamingResponse function since we're using real API calls
 
   const handleExportChat = () => {
     // In real app, this would export chat to PDF/TXT

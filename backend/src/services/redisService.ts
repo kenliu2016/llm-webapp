@@ -14,15 +14,36 @@ export interface SessionData {
 export class RedisService {
   private client: RedisClientType;
   private isConnected: boolean = false;
+  private maxRetries = 3;
+  private retryDelay = 2000; // 2 seconds
+  private connectionOptions: any;
 
   constructor() {
-    this.client = createClient({
-      url: process.env.REDIS_URL || 'redis://localhost:6379',
+    // Configure connection options with better defaults
+    this.connectionOptions = {
+      socket: {
+        connectTimeout: 10000, // 10 seconds timeout
+        keepAlive: 60,
+      },
       password: process.env.REDIS_PASSWORD || undefined,
-    });
+    };
 
+    // Use REDIS_URL if available, otherwise use individual configs
+    if (process.env.REDIS_URL) {
+      this.connectionOptions.url = process.env.REDIS_URL;
+    } else {
+      this.connectionOptions.socket.host = process.env.REDIS_HOST || 'localhost';
+      this.connectionOptions.socket.port = parseInt(process.env.REDIS_PORT || '6379');
+    }
+
+    this.client = createClient(this.connectionOptions);
+
+    // Enhanced event listeners
     this.client.on('error', (err) => {
       logger.error('Redis Client Error:', err);
+      if (this.isConnected) {
+        this.isConnected = false;
+      }
     });
 
     this.client.on('connect', () => {
@@ -34,20 +55,73 @@ export class RedisService {
       logger.warn('Redis client disconnected');
       this.isConnected = false;
     });
+
+    this.client.on('reconnecting', (info) => {
+      logger.info(`Redis reconnecting: attempt ${info.attempt} after ${info.delay}ms`);
+    });
+
+    this.client.on('ready', () => {
+      logger.info('Redis client ready for commands');
+    });
   }
 
   /**
-   * Connect to Redis
+   * Connect to Redis with retry mechanism
    */
   async connect(): Promise<void> {
-    try {
-      if (!this.isConnected) {
+    let retries = 0;
+    
+    while (retries < this.maxRetries) {
+      try {
+        if (this.isConnected) {
+          logger.debug('Redis already connected');
+          return;
+        }
+
+        // Log connection attempt details
+        const host = process.env.REDIS_HOST || 'localhost';
+        const port = process.env.REDIS_PORT || '6379';
+        logger.info(`Attempting to connect to Redis at ${host}:${port}`);
+        
         await this.client.connect();
-        logger.info('Redis connection established');
+        logger.info('Redis connection established successfully');
+        this.isConnected = true;
+        
+        // Log Redis info after successful connection
+        await this.logRedisInfo();
+        
+        return;
+      } catch (error) {
+        retries++;
+        logger.error(`Redis connection attempt ${retries} failed:`, error);
+        
+        if (retries >= this.maxRetries) {
+          logger.error('All Redis connection attempts failed');
+          this.isConnected = false;
+          throw error;
+        }
+        
+        logger.info(`Retrying Redis connection in ${this.retryDelay}ms...`);
+        await new Promise(resolve => setTimeout(resolve, this.retryDelay));
+      }
+    }
+  }
+
+  /**
+   * Log Redis server information
+   */
+  private async logRedisInfo(): Promise<void> {
+    try {
+      if (this.isConnected) {
+        const info = await this.client.info();
+        // Extract and log version info
+        const versionMatch = info.match(/redis_version:(\d+\.\d+\.\d+)/);
+        if (versionMatch && versionMatch[1]) {
+          logger.info(`Connected to Redis server version: ${versionMatch[1]}`);
+        }
       }
     } catch (error) {
-      logger.error('Failed to connect to Redis:', error);
-      throw error;
+      logger.warn('Failed to get Redis info:', error);
     }
   }
 

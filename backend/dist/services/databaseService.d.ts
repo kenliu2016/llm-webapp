@@ -1,18 +1,29 @@
+import pg from 'pg';
 export interface DatabaseConfig {
     host: string;
     port: number;
     database: string;
     username: string;
     password: string;
+    poolSize?: number;
+    ssl?: boolean;
 }
 export declare class DatabaseService {
     private config;
+    private pool;
     private isConnected;
+    private maxRetries;
+    private retryDelay;
+    private healthCheckRetryInterval;
     constructor();
     /**
-     * Connect to the database
+     * Connect to the database with retry mechanism
      */
     connect(): Promise<void>;
+    /**
+     * Log pool statistics periodically
+     */
+    private logPoolStats;
     /**
      * Disconnect from the database
      */
@@ -22,23 +33,23 @@ export declare class DatabaseService {
      */
     isReady(): boolean;
     /**
-     * Health check
+     * Health check - simplified for stability in development environment
      */
     healthCheck(): Promise<boolean>;
     /**
-     * Execute a query (placeholder)
+     * Execute a query
      */
     query(sql: string, params?: any[]): Promise<any>;
     /**
-     * Begin transaction
+     * Get a client from the pool
      */
-    beginTransaction(): Promise<void>;
+    getClient(): Promise<pg.PoolClient>;
     /**
-     * Commit transaction
+     * Execute a transaction
      */
-    commitTransaction(): Promise<void>;
+    transaction<T>(callback: (client: pg.PoolClient) => Promise<T>): Promise<T>;
     /**
-     * Rollback transaction
+     * Get pool statistics
      */
-    rollbackTransaction(): Promise<void>;
+    getPoolStats(): any;
 }
