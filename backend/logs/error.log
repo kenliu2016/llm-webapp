@@ -1,0 +1,1 @@
+{"duration":10.15,"ip":"::1","level":"error","memoryUsage":{"external":2.52,"heapTotal":18.78,"heapUsed":0.56},"message":"Request error","method":"POST","service":"llm-webapp","statusCode":404,"timestamp":"2025-08-26T19:43:45.193Z","url":"/","userAgent":"curl/8.12.1","userId":"anonymous"}

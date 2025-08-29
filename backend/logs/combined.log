@@ -1,0 +1,87 @@
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mOpenAI API key not configured - OpenAI models will not be available\u001b[39m","timestamp":"2025-08-26 09:52:36:5236"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mAnthropic API key not configured - Claude models will not be available\u001b[39m","timestamp":"2025-08-26 09:52:36:5236"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mJWT_SECRET not set in environment variables, using fallback\u001b[39m","timestamp":"2025-08-26 09:52:36:5236"}
+{"cors":["https://chipfoundryservices.com","https://www.chipfoundryservices.com","http://localhost:3000","http://localhost:5173"],"environment":"development","level":"\u001b[32minfo\u001b[39m","message":"\u001b[32m🚀 LLM Chat API Server running on port 3001\u001b[39m","port":"3001","timestamp":"2025-08-26 09:52:36:5236"}
+{"level":"\u001b[32minfo\u001b[39m","message":"\u001b[32mGraceful shutdown initiated...\u001b[39m","timestamp":"2025-08-26 09:52:42:5242"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mOpenAI API key not configured - OpenAI models will not be available\u001b[39m","timestamp":"2025-08-26 09:52:43:5243"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mAnthropic API key not configured - Claude models will not be available\u001b[39m","timestamp":"2025-08-26 09:52:43:5243"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mJWT_SECRET not set in environment variables, using fallback\u001b[39m","timestamp":"2025-08-26 09:52:43:5243"}
+{"cors":["https://chipfoundryservices.com","https://www.chipfoundryservices.com","http://localhost:3000","http://localhost:5173"],"environment":"development","level":"\u001b[32minfo\u001b[39m","message":"\u001b[32m🚀 LLM Chat API Server running on port 3001\u001b[39m","port":"3001","timestamp":"2025-08-26 09:52:43:5243"}
+{"level":"\u001b[32minfo\u001b[39m","message":"\u001b[32mGraceful shutdown initiated...\u001b[39m","timestamp":"2025-08-26 09:53:08:538"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mOpenAI API key not configured - OpenAI models will not be available\u001b[39m","timestamp":"2025-08-26 09:53:08:538"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mAnthropic API key not configured - Claude models will not be available\u001b[39m","timestamp":"2025-08-26 09:53:08:538"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mJWT_SECRET not set in environment variables, using fallback\u001b[39m","timestamp":"2025-08-26 09:53:08:538"}
+{"cors":["https://chipfoundryservices.com","https://www.chipfoundryservices.com","http://localhost:3000","http://localhost:5173"],"environment":"development","level":"\u001b[32minfo\u001b[39m","message":"\u001b[32m🚀 LLM Chat API Server running on port 3001\u001b[39m","port":"3001","timestamp":"2025-08-26 09:53:08:538"}
+{"level":"\u001b[32minfo\u001b[39m","message":"\u001b[32mGraceful shutdown initiated...\u001b[39m","timestamp":"2025-08-26 09:53:15:5315"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mOpenAI API key not configured - OpenAI models will not be available\u001b[39m","timestamp":"2025-08-26 09:53:16:5316"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mAnthropic API key not configured - Claude models will not be available\u001b[39m","timestamp":"2025-08-26 09:53:16:5316"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mJWT_SECRET not set in environment variables, using fallback\u001b[39m","timestamp":"2025-08-26 09:53:16:5316"}
+{"cors":["https://chipfoundryservices.com","https://www.chipfoundryservices.com","http://localhost:3000","http://localhost:5173"],"environment":"development","level":"\u001b[32minfo\u001b[39m","message":"\u001b[32m🚀 LLM Chat API Server running on port 3001\u001b[39m","port":"3001","timestamp":"2025-08-26 09:53:16:5316"}
+{"level":"\u001b[32minfo\u001b[39m","message":"\u001b[32mGraceful shutdown initiated...\u001b[39m","timestamp":"2025-08-26 09:54:06:546"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mOpenAI API key not configured - OpenAI models will not be available\u001b[39m","timestamp":"2025-08-26 09:54:07:547"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mAnthropic API key not configured - Claude models will not be available\u001b[39m","timestamp":"2025-08-26 09:54:07:547"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mJWT_SECRET not set in environment variables, using fallback\u001b[39m","timestamp":"2025-08-26 09:54:07:547"}
+{"cors":["https://chipfoundryservices.com","https://www.chipfoundryservices.com","http://localhost:3000","http://localhost:5173"],"environment":"development","level":"\u001b[32minfo\u001b[39m","message":"\u001b[32m🚀 LLM Chat API Server running on port 3001\u001b[39m","port":"3001","timestamp":"2025-08-26 09:54:07:547"}
+{"level":"\u001b[32minfo\u001b[39m","message":"\u001b[32mGraceful shutdown initiated...\u001b[39m","timestamp":"2025-08-26 10:14:39:1439"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mOpenAI API key not configured - OpenAI models will not be available\u001b[39m","timestamp":"2025-08-26 10:15:15:1515"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mAnthropic API key not configured - Claude models will not be available\u001b[39m","timestamp":"2025-08-26 10:15:15:1515"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mJWT_SECRET not set in environment variables, using fallback\u001b[39m","timestamp":"2025-08-26 10:15:15:1515"}
+{"cors":["https://chipfoundryservices.com","https://www.chipfoundryservices.com","http://localhost:3000","http://localhost:5173"],"environment":"development","level":"\u001b[32minfo\u001b[39m","message":"\u001b[32m🚀 LLM Chat API Server running on port 3002\u001b[39m","port":"3002","timestamp":"2025-08-26 10:15:15:1515"}
+{"level":"\u001b[32minfo\u001b[39m","message":"\u001b[32mGraceful shutdown initiated...\u001b[39m","timestamp":"2025-08-26 10:15:30:1530"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mOpenAI API key not configured - OpenAI models will not be available\u001b[39m","timestamp":"2025-08-26 10:15:52:1552"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mAnthropic API key not configured - Claude models will not be available\u001b[39m","timestamp":"2025-08-26 10:15:52:1552"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mJWT_SECRET not set in environment variables, using fallback\u001b[39m","timestamp":"2025-08-26 10:15:52:1552"}
+{"cors":["https://chipfoundryservices.com","https://www.chipfoundryservices.com","http://localhost:3000","http://localhost:5173"],"environment":"development","level":"\u001b[32minfo\u001b[39m","message":"\u001b[32m🚀 LLM Chat API Server running on port 3002\u001b[39m","port":"3002","timestamp":"2025-08-26 10:15:53:1553"}
+{"level":"\u001b[32minfo\u001b[39m","message":"\u001b[32mGraceful shutdown initiated...\u001b[39m","timestamp":"2025-08-26 10:16:11:1611"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mOpenAI API key not configured - OpenAI models will not be available\u001b[39m","timestamp":"2025-08-26 10:16:45:1645"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mAnthropic API key not configured - Claude models will not be available\u001b[39m","timestamp":"2025-08-26 10:16:45:1645"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mJWT_SECRET not set in environment variables, using fallback\u001b[39m","timestamp":"2025-08-26 10:16:45:1645"}
+{"cors":["https://chipfoundryservices.com","https://www.chipfoundryservices.com","http://localhost:3000","http://localhost:5173"],"environment":"development","level":"\u001b[32minfo\u001b[39m","message":"\u001b[32m🚀 LLM Chat API Server running on port 3002\u001b[39m","port":"3002","timestamp":"2025-08-26 10:16:45:1645"}
+{"level":"\u001b[32minfo\u001b[39m","message":"\u001b[32mGraceful shutdown initiated...\u001b[39m","timestamp":"2025-08-26 10:24:52:2452"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mOpenAI API key not configured - OpenAI models will not be available\u001b[39m","timestamp":"2025-08-26 11:07:55:755"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mAnthropic API key not configured - Claude models will not be available\u001b[39m","timestamp":"2025-08-26 11:07:55:755"}
+{"level":"\u001b[33mwarn\u001b[39m","message":"\u001b[33mJWT_SECRET not set in environment variables, using fallback\u001b[39m","timestamp":"2025-08-26 11:07:55:755"}
+{"cors":["https://chipfoundryservices.com","https://www.chipfoundryservices.com","http://localhost:3000","http://localhost:5173"],"environment":"development","level":"\u001b[32minfo\u001b[39m","message":"\u001b[32m🚀 LLM Chat API Server running on port 3002\u001b[39m","port":"3002","timestamp":"2025-08-26 11:07:55:755"}
+{"duration":"3ms","ip":"::1","level":"\u001b[32minfo\u001b[39m","message":"\u001b[32mHTTP Request\u001b[39m","method":"GET","status":404,"timestamp":"2025-08-26 11:08:40:840","url":"/","userAgent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"}
+{"level":"\u001b[32minfo\u001b[39m","message":"\u001b[32mGraceful shutdown initiated...\u001b[39m","timestamp":"2025-08-26 11:13:52:1352"}
+{"level":"info","message":"Auth routes not available, using basic chat routes","service":"llm-webapp","timestamp":"2025-08-26T19:40:54.438Z"}
+{"level":"info","message":"User routes not available","service":"llm-webapp","timestamp":"2025-08-26T19:40:54.440Z"}
+{"level":"info","message":"Admin routes not available","service":"llm-webapp","timestamp":"2025-08-26T19:40:54.440Z"}
+{"level":"info","message":"OAuth routes not available","service":"llm-webapp","timestamp":"2025-08-26T19:40:54.441Z"}
+{"cors":["https://chipfoundryservices.com","https://www.chipfoundryservices.com","http://localhost:3000","http://localhost:5173"],"environment":"development","features":"Authentication, OAuth, Admin Dashboard, Multi-modal Chat, Monitoring","level":"info","message":"🚀 LLM Chat API Server (Phase 6) running on port 3002","port":"3002","service":"llm-webapp","timestamp":"2025-08-26T19:40:54.443Z"}
+{"level":"info","message":"Graceful shutdown initiated...","service":"llm-webapp","timestamp":"2025-08-26T19:41:10.641Z"}
+{"level":"info","message":"Auth routes not available, using basic chat routes","service":"llm-webapp","timestamp":"2025-08-26T19:41:33.544Z"}
+{"level":"info","message":"User routes not available","service":"llm-webapp","timestamp":"2025-08-26T19:41:33.545Z"}
+{"level":"info","message":"Admin routes not available","service":"llm-webapp","timestamp":"2025-08-26T19:41:33.546Z"}
+{"level":"info","message":"OAuth routes not available","service":"llm-webapp","timestamp":"2025-08-26T19:41:33.546Z"}
+{"cors":["https://chipfoundryservices.com","https://www.chipfoundryservices.com","http://localhost:3000","http://localhost:5173"],"environment":"development","features":"Authentication, OAuth, Admin Dashboard, Multi-modal Chat, Monitoring","level":"info","message":"🚀 LLM Chat API Server (Phase 6) running on port 3002","port":"3002","service":"llm-webapp","timestamp":"2025-08-26T19:41:33.548Z"}
+{"level":"info","message":"Graceful shutdown initiated...","service":"llm-webapp","timestamp":"2025-08-26T19:41:46.149Z"}
+{"level":"info","message":"Auth routes not available, using basic chat routes","service":"llm-webapp","timestamp":"2025-08-26T19:42:04.144Z"}
+{"level":"info","message":"User routes not available","service":"llm-webapp","timestamp":"2025-08-26T19:42:04.146Z"}
+{"level":"info","message":"Admin routes not available","service":"llm-webapp","timestamp":"2025-08-26T19:42:04.147Z"}
+{"level":"info","message":"OAuth routes not available","service":"llm-webapp","timestamp":"2025-08-26T19:42:04.147Z"}
+{"cors":["https://chipfoundryservices.com","https://www.chipfoundryservices.com","http://localhost:3000","http://localhost:5173"],"environment":"development","features":"Authentication, OAuth, Admin Dashboard, Multi-modal Chat, Monitoring","level":"info","message":"🚀 LLM Chat API Server (Phase 6) running on port 3002","port":"3002","service":"llm-webapp","timestamp":"2025-08-26T19:42:04.149Z"}
+{"level":"info","message":"Graceful shutdown initiated...","service":"llm-webapp","timestamp":"2025-08-26T19:42:15.444Z"}
+{"level":"info","message":"Auth routes not available, using basic chat routes","service":"llm-webapp","timestamp":"2025-08-26T19:42:58.180Z"}
+{"level":"info","message":"User routes not available","service":"llm-webapp","timestamp":"2025-08-26T19:42:58.182Z"}
+{"level":"info","message":"Admin routes not available","service":"llm-webapp","timestamp":"2025-08-26T19:42:58.182Z"}
+{"level":"info","message":"OAuth routes not available","service":"llm-webapp","timestamp":"2025-08-26T19:42:58.182Z"}
+{"cors":["https://chipfoundryservices.com","https://www.chipfoundryservices.com","http://localhost:3000","http://localhost:5173"],"environment":"development","features":"Authentication, OAuth, Admin Dashboard, Multi-modal Chat, Monitoring","level":"info","message":"🚀 LLM Chat API Server (Phase 6) running on port 3001","port":"3001","service":"llm-webapp","timestamp":"2025-08-26T19:42:58.185Z"}
+{"level":"info","message":"Graceful shutdown initiated...","service":"llm-webapp","timestamp":"2025-08-26T19:43:08.864Z"}
+{"level":"info","message":"Auth routes not available, using basic chat routes","service":"llm-webapp","timestamp":"2025-08-26T19:43:14.838Z"}
+{"level":"info","message":"User routes not available","service":"llm-webapp","timestamp":"2025-08-26T19:43:14.840Z"}
+{"level":"info","message":"Admin routes not available","service":"llm-webapp","timestamp":"2025-08-26T19:43:14.841Z"}
+{"level":"info","message":"OAuth routes not available","service":"llm-webapp","timestamp":"2025-08-26T19:43:14.841Z"}
+{"cors":["https://chipfoundryservices.com","https://www.chipfoundryservices.com","http://localhost:3000","http://localhost:5173"],"environment":"development","features":"Authentication, OAuth, Admin Dashboard, Multi-modal Chat, Monitoring","level":"info","message":"🚀 LLM Chat API Server (Phase 6) running on port 3001","port":"3001","service":"llm-webapp","timestamp":"2025-08-26T19:43:14.843Z"}
+{"duration":6.34,"ip":"::1","level":"info","memoryUsage":{"external":2.52,"heapTotal":18.53,"heapUsed":0.21},"message":"Request completed","method":"GET","service":"llm-webapp","statusCode":200,"timestamp":"2025-08-26T19:43:23.474Z","url":"/health","userAgent":"curl/8.12.1","userId":"anonymous"}
+{"date":"2025-08-26","hour":12,"level":"info","message":"Metrics stored","metrics":{"duration":6.34,"ip":"::1","memoryUsage":{"external":2.52,"heapTotal":18.53,"heapUsed":0.21},"method":"GET","statusCode":200,"url":"/health","userAgent":"curl/8.12.1","userId":"anonymous"},"service":"llm-webapp","timestamp":"2025-08-26T19:43:23.474Z"}
+{"duration":"4ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"llm-webapp","status":200,"timestamp":"2025-08-26T19:43:23.476Z","url":"/health","userAgent":"curl/8.12.1"}
+{"duration":0.72,"ip":"::1","level":"info","memoryUsage":{"external":2.52,"heapTotal":18.78,"heapUsed":0.29},"message":"Request completed","method":"GET","service":"llm-webapp","statusCode":200,"timestamp":"2025-08-26T19:43:33.030Z","url":"/health","userAgent":"curl/8.12.1","userId":"anonymous"}
+{"date":"2025-08-26","hour":12,"level":"info","message":"Metrics stored","metrics":{"duration":0.72,"ip":"::1","memoryUsage":{"external":2.52,"heapTotal":18.78,"heapUsed":0.29},"method":"GET","statusCode":200,"url":"/health","userAgent":"curl/8.12.1","userId":"anonymous"},"service":"llm-webapp","timestamp":"2025-08-26T19:43:33.031Z"}
+{"duration":"1ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"llm-webapp","status":200,"timestamp":"2025-08-26T19:43:33.031Z","url":"/health","userAgent":"curl/8.12.1"}
+{"duration":1.5,"ip":"::1","level":"info","memoryUsage":{"external":2.52,"heapTotal":18.78,"heapUsed":0.07},"message":"Request completed","method":"GET","service":"llm-webapp","statusCode":200,"timestamp":"2025-08-26T19:43:38.775Z","url":"/api","userAgent":"curl/8.12.1","userId":"anonymous"}
+{"date":"2025-08-26","hour":12,"level":"info","message":"Metrics stored","metrics":{"duration":1.5,"ip":"::1","memoryUsage":{"external":2.52,"heapTotal":18.78,"heapUsed":0.07},"method":"GET","statusCode":200,"url":"/api","userAgent":"curl/8.12.1","userId":"anonymous"},"service":"llm-webapp","timestamp":"2025-08-26T19:43:38.775Z"}
+{"duration":"2ms","ip":"::1","level":"info","message":"HTTP Request","method":"GET","service":"llm-webapp","status":200,"timestamp":"2025-08-26T19:43:38.776Z","url":"/api","userAgent":"curl/8.12.1"}
+{"duration":10.15,"ip":"::1","level":"error","memoryUsage":{"external":2.52,"heapTotal":18.78,"heapUsed":0.56},"message":"Request error","method":"POST","service":"llm-webapp","statusCode":404,"timestamp":"2025-08-26T19:43:45.193Z","url":"/","userAgent":"curl/8.12.1","userId":"anonymous"}
+{"date":"2025-08-26","hour":12,"level":"info","message":"Metrics stored","metrics":{"duration":10.15,"ip":"::1","memoryUsage":{"external":2.52,"heapTotal":18.78,"heapUsed":0.56},"method":"POST","statusCode":404,"url":"/","userAgent":"curl/8.12.1","userId":"anonymous"},"service":"llm-webapp","timestamp":"2025-08-26T19:43:45.194Z"}
+{"duration":"2ms","ip":"::1","level":"info","message":"HTTP Request","method":"POST","service":"llm-webapp","status":404,"timestamp":"2025-08-26T19:43:45.194Z","url":"/","userAgent":"curl/8.12.1"}
