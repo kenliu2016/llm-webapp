@@ -97,7 +97,15 @@ const limiter = rateLimit({
 // Apply middleware
 app.use(cors(corsOptions));
 app.use(compression());
-app.use(limiter);
+
+// 根据环境变量决定是否启用速率限制
+if (process.env.NODE_ENV === 'production' || process.env.ENABLE_RATE_LIMIT === 'true') {
+  logger.info('Enabling rate limiting middleware');
+  app.use(limiter);
+} else {
+  logger.info('Rate limiting disabled in development environment');
+}
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
@@ -169,7 +177,7 @@ app.get('/health', async (_req: express.Request, res: express.Response) => {
 });
 
 // API Routes - Basic setup (enhanced routes to be added)
-app.use('/api/chat', chatRoutes);
+app.use('/api', chatRoutes);
 
 // Try to import enhanced routes if they exist
 try {
